@@ -1,10 +1,17 @@
 const mongoose = require('mongoose');
 
 const reactionSchema = new mongoose.Schema({
-  reactionText: { type: String, required: true },
+  reactionID: { type: mongoose.Schema.Types.ObjectId, default:()=> new Schema.Types.ObjectId() },
+  reactionbody: { type: String, required: true, maxlength:280 },
+  username: { type: String, required: true },
+  createdAt:{type: Date, default:Date.now},
   // Add other reaction properties as needed
+},
+{
+    toJSON:{getters:true},
+    id:false
 });
 
-const Reaction = mongoose.model('Reaction', reactionSchema);
 
-module.exports = Reaction;
+
+module.exports = reactionSchema;
